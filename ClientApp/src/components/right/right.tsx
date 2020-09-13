@@ -7,6 +7,5 @@ export interface RightProps {
 
 export function Right({text}: RightProps) {
 
-
     return <div>{text}</div>
 }
