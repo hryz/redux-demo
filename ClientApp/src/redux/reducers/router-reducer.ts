@@ -1,15 +1,15 @@
-import {AllActions, LocationState} from "../store";
+import {AllActions} from "../store";
 import {Reducer} from "redux";
 import {connectRouter, LOCATION_CHANGE, RouterState} from "connected-react-router";
 import {History} from "history"
 
 
-type RouterReducerFactory = (h:History<LocationState>) => Reducer<RouterState<LocationState>, AllActions>
+type RouterReducerFactory = (h:History) => Reducer<RouterState, AllActions>
 
 export const createRouteReducer : RouterReducerFactory = (history) => {
 
-    const router = connectRouter<LocationState>(history)
-    const initialState: RouterState<LocationState> = {
+    const router = connectRouter(history)
+    const initialState: RouterState = {
         action: history.action,
         location: history.location
     }

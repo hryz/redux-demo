@@ -13,23 +13,19 @@ import { createBrowserHistory } from 'history'
 import {RouterAction, routerMiddleware, RouterRootState} from 'connected-react-router'
 import {createRouteReducer} from "./reducers/router-reducer";
 
-export interface LocationState {
-    id?: number
-}
-
 export type AllActions =
     | AppActions
     | LeftActions
     | RightActions
-    | RouterAction<LocationState>
+    | RouterAction
 
-export interface RootState extends RouterRootState<LocationState>{
+export interface RootState extends RouterRootState{
     app: AppState
     left: LeftState
     right: RightState
 }
 
-export const history = createBrowserHistory<LocationState>()
+export const history = createBrowserHistory()
 const rootReducer = combineReducers<RootState, AllActions>({
     app: AppReducer,
     left: LeftReducer,
