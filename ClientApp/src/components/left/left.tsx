@@ -2,13 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {AsyncAction, delay, useAppSelector, useAsyncDispatch} from "../../redux/store";
 import {LeftActions, leftDecreased, leftIncreased} from "./actions";
 import './left.css'
+import {push, RouterAction} from "connected-react-router";
 
 export interface LeftProps {
     text: string
 }
 
 //kinda command handlers
-const handleClick = (currentValue:number) : AsyncAction<LeftActions>  =>
+const handleClick = (currentValue:number) : AsyncAction<LeftActions|RouterAction>  =>
     async (dispatch, getState) => {
 
     const rootState = getState() //if you really really want, you can get the whole app state here
@@ -22,6 +23,7 @@ const handleClick = (currentValue:number) : AsyncAction<LeftActions>  =>
         await delay(1000) //REST call
         dispatch({type: leftDecreased, decrement: 5}) //dispatch the result
     }
+    dispatch(push('/right/' + 42))
 };
 
 //kinda view
@@ -43,6 +45,7 @@ export function Left({text}: LeftProps) {
             dispatch({type:leftDecreased, decrement: 1})
         })()
     },[dispatch])
+
 
     return (
     <div>
